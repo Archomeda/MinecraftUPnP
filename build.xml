@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MinecraftUPnP" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+    
+    <property file="build.properties" />    
+    
+    <property name="lib.dir" value="${basedir}/lib" />
+    <property name="build.dir" value="${basedir}/build" />
+    <property name="maven.dir" value="${basedir}/maven" />
+    
+    <property name="maven.ant.tasks.version" value="2.1.3" />
+    <property name="maven.ant.tasks.file" value="maven-ant-tasks-${maven.ant.tasks.version}.jar" />
+    <property name="maven.ant.tasks.location" value="${maven.dir}/${maven.ant.tasks.file}" />
+    <property name="maven.ant.tasks.url" value="http://www.us.apache.org/dist/maven/ant-tasks/${maven.ant.tasks.version}/binaries/${maven.ant.tasks.file}" />
+    <available property="maven.ant.tasks.file.exists" file="${maven.ant.tasks.location}" />
+    
+    <condition property="python.exe" value="${mcp.home}/runtime/bin/python/python_mcp" else="python">
+        <os family="Windows" />
+    </condition>
+    
+
+    <!-- Downloads Maven Ant tasks if not already downloaded -->
+    <target name="download.maven.tasks" unless="maven.ant.tasks.file.exists">
+        <mkdir dir="${maven.dir}" />
+        <get src="${maven.ant.tasks.url}" dest="${maven.ant.tasks.location}" />
+    </target>
+    
+    <!-- Typedefs Maven Ant tasks JAR -->
+    <target name="init.maven.tasks" depends="download.maven.tasks">
+        <path id="maven.ant.tasks.classpath" path="${maven.ant.tasks.location}" />
+        <typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpathref="maven.ant.tasks.classpath" />
+    </target>
+    
+    <!-- Defines all dependencies -->
+    <target name="load.maven.tasks" depends="init.maven.tasks">
+        <!-- Maven repository of 4th Line.org (for Cling) -->
+        <artifact:remoteRepository id="repo.4thline" url="http://4thline.org/m2" />
+        
+        <artifact:dependencies filesetId="dependencies.fileset">
+            <!-- 4th Line.org's Cling -->
+            <remoteRepository refid="repo.4thline" />
+            <dependency groupId="org.teleal.cling" artifactId="cling-support" version="1.0.5" />
+        </artifact:dependencies>
+    </target>
+    
+    <!-- Copies all dependencies to the lib directory -->
+    <target name="copy.maven.tasks.libs" depends="load.maven.tasks">
+        <copy todir="${lib.dir}">
+            <fileset refid="dependencies.fileset" />
+            <mapper type="flatten" />
+        </copy>
+    </target>
+
+    
+    <!-- Cleans some MCP directories -->
+    <target name="clean">
+        <delete dir="${mcp.home}/src/minecraft/archomeda" />
+        <delete dir="${mcp.home}/reobf/minecraft" />
+    </target>
+    
+    <!-- Does all above and cleans all extra downloaded files -->
+    <target name="clean.all" depends="clean">
+        <delete dir="${lib.dir}" />
+        <delete dir="${maven.dir}" />
+    </target>
+    
+    <!-- Copies the source files to the MCP src directory and sets the mod version in the source files
+         and copies the libraries as well -->
+    <target name="merge" depends="clean">
+        <copy todir="${mcp.home}/src/minecraft" overwrite="true" verbose="true">
+            <fileset dir="${basedir}/src" includes="**/*.java" />
+        </copy>
+        <copy todir="${mcp.home}/lib" overwrite="true" verbose="true">
+            <fileset dir="${lib.dir}" includes="**/*.jar" />
+        </copy>
+        <replace dir="${mcp.home}/src/minecraft" token="@MOD_VERSION@" value="${version}" />
+    </target>
+    
+    <!-- Compile the source files by calling the MCP Python recompile script -->
+    <target name="recompile" depends="merge">
+        <exec executable="${python.exe}" dir="${mcp.home}">
+            <arg value="runtime/recompile.py" />
+        </exec>
+    </target>
+    
+    <!-- Obfuscate the compiled files by calling the MCP Python reobfuscate script -->
+    <target name="reobfuscate" depends="recompile">
+        <exec executable="${python.exe}" dir="${mcp.home}">
+            <arg value="runtime/reobfuscate.py" />
+        </exec>
+    </target>
+    
+    <!-- Builds the complete package as a .zip file with all dependencies included -->
+    <target name="build" depends="copy.maven.tasks.libs,reobfuscate">
+        <property name="output.file" value="${ant.project.name}-${version.minecraft}-${version}.jar" />
+        <mkdir dir="${build.dir}" />
+        
+        <!-- Temporarily extract all external library JARs to another JAR in order to ignore META-INFs in the next step -->
+        <jar jarfile="${build.dir}/external.jar">
+            <zipgroupfileset dir="${lib.dir}" includes="**/*.jar" />
+        </jar>
+        
+        <!-- Create final JAR -->
+        <jar destfile="${build.dir}/${output.file}">
+            <fileset dir="${mcp.home}/reobf/minecraft" includes="**/*.class" />
+            <fileset dir="${basedir}">
+                <include name="**/licenses/**" />
+            </fileset>            
+            <zipfileset src="${build.dir}/external.jar" excludes="META-INF/**" />
+        </jar>
+        
+        <!-- Remove temporary JAR file -->
+        <delete file="${build.dir}/external.jar" />
+        
+        <!-- Clean up the mess -->
+        <antcall target="clean" />
+    </target>
+</project>

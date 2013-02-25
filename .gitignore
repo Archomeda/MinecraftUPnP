@@ -1,0 +1,27 @@
+# Windows
+Thumbs.db
+ehthumbs.
+Desktop.ini
+
+# Eclipse
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
+
+# Ant
+/build.properties
+/build
+/lib
+/maven
