@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Archomeda.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ * 
+ * Contributors:
+ *     Archomeda - initial API and implementation
+ ******************************************************************************/
 package archomeda.upnp;
 
 import java.util.logging.Logger;
@@ -17,6 +27,11 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
+/**
+ * The main class for MinecraftUPnP. Handles all mod logic.
+ * 
+ * @author Archomeda
+ */
 @Mod(modid = "MinecraftUPnP", name = "MinecraftUPnP", version = "@MOD_VERSION@")
 @NetworkMod(clientSideRequired = false, serverSideRequired = false)
 public class MinecraftUpnp {

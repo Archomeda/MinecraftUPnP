@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Archomeda.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ * 
+ * Contributors:
+ *     Archomeda - initial API and implementation
+ ******************************************************************************/
 package archomeda.upnp;
 
 import java.net.InetAddress;
@@ -22,6 +32,11 @@ import org.teleal.cling.support.igd.callback.PortMappingAdd;
 import org.teleal.cling.support.igd.callback.PortMappingDelete;
 import org.teleal.cling.support.model.PortMapping;
 
+/**
+ * The main UPnP API of Minecraft UPnP. Contains all supported UPnP logic in this mod.
+ * 
+ * @author Archomeda
+ */
 public class Upnp {
     private static UpnpService upnpService;
     private static RemoteDevice device;
