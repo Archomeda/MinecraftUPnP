@@ -3,6 +3,12 @@ MinecraftUPnP is a mod for Minecraft servers that adds several abilities for UPn
 
 Please note that this readme is provided "as is" and may contain incorrect and/or incomplete information. If something is not correct, please file an issue explaining what's wrong or missing.
 
+- [Features](#features)
+- [Downloads](#downloads)
+- [Setting up the build environment](#setting-up-the-build-environment)
+- [Compiling](#compiling)
+- [Third party dependencies](#third-party-dependencies)
+
 
 ## Features ##
 In this section are all features listed that are currently available in MinecraftUPnP. If you want a feature to be added, please submit an issue or fork this repo and do a pull request.
@@ -21,6 +27,8 @@ Only the main features are listed here. For other (more hidden) features, please
   *Note: Please do not abuse this functionality by adding too many ports (like a range of 1,000 passive ports for FTP); some routers do not like this.*<br>
   *Note 2: Registered ports get automatically unforwarded upon server shutdown.*
 
+## Downloads ##
+ - [v1.0 for Minecraft 1.4.7 (Forge #497)](https://dl.dropbox.com/u/678063/Minecraft/MinecraftUPnP/MinecraftUPnP-1.4.7-1.0.jar)
 
 ## Setting up the build environment ##
 *Note: In this section, [Eclipse](http://www.eclipse.org/) will be used as example.*
