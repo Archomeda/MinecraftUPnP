@@ -17,8 +17,8 @@ Only the main features are listed here. For other (more hidden) features, please
 
 - Shortcut to get the LAN IP address (`archomeda.upnp.Upnp.getLanIp()`)
 - Automatic detection of the external (WAN) IP address (can be retrieved from `archomeda.upnp.Upnp.getExternalIp()`)
-- Ability to register and unregister ports that will be forwarded and unforwarded automatically (through `archomeda.upnp.Upnp.registerPort(int)` and `archomeda.upnp.Upnp.unregisterPort(int)`)
-  *Note: Please do not abuse this functionality by adding too many ports (like a range of 1,000 passive ports for FTP); some routers do not like this.*
+- Ability to register and unregister ports that will be forwarded and unforwarded automatically (through `archomeda.upnp.Upnp.registerPort(int)` and `archomeda.upnp.Upnp.unregisterPort(int)`)<br>
+  *Note: Please do not abuse this functionality by adding too many ports (like a range of 1,000 passive ports for FTP); some routers do not like this.*<br>
   *Note 2: Registered ports get automatically unforwarded upon server shutdown.*
 
 
@@ -43,7 +43,7 @@ Only the main features are listed here. For other (more hidden) features, please
   - `mcp.home=<relative_path_to_mcp_dir>` (most common: `forge/mcp` or `../forge/mcp`)
   - `version.minecraft=<version>` (Minecraft version, current: 1.4.7)
   - `version=<version>` (MinecraftUPnP version, last: 1.0)
-4. Run `ant build` and let it run for a while. Please note that an active internet connection is required when running this for the first time. As it will download Maven first in order to resolve and download the dependencies. After that, it will automatically compile and obfuscate the code.
+4. Run `ant build` and let it run for a while. Please note that an active internet connection is required when running this for the first time as it will download Maven first in order to resolve and download the dependencies. After that, it will automatically compile and obfuscate the code.
 5. If successful, inside the `build` directory, you should see a new .zip file with your version numbers in its name.
 
 ## Third party dependencies ##
