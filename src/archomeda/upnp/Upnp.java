@@ -180,7 +180,7 @@ public class Upnp {
      *            The port number to register.
      */
     public static void registerPort(int port) {
-        if (deviceTimeout)
+        if (deviceTimeout || registeredPorts.contains(port))
             return;
 
         final AutoResetEvent resetEvent = new AutoResetEvent(false);
@@ -215,7 +215,7 @@ public class Upnp {
      *            The port number to unregister.
      */
     public static void unregisterPort(int port) {
-        if (deviceTimeout)
+        if (deviceTimeout || !registeredPorts.contains(port))
             return;
 
         final AutoResetEvent resetEvent = new AutoResetEvent(false);
