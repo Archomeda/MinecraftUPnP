@@ -89,7 +89,7 @@ public class Upnp {
                     if (Upnp.isAutoWanIpEnabled())
                         Upnp.loadWanIp();
                     else
-                        Upnp.wanIp = Config.external_ip;
+                        Upnp.wanIp = Config.externalIp;
                     resetEvent.set();
                 }
             }
@@ -170,7 +170,7 @@ public class Upnp {
      * @return True if the WAN IP address is automatically detected, otherwise false.
      */
     public static boolean isAutoWanIpEnabled() {
-        return Config.external_ip == null || Config.external_ip.isEmpty();
+        return Config.externalIp == null || Config.externalIp.isEmpty();
     }
 
     /**

@@ -57,7 +57,7 @@ public class MinecraftUpnp {
 
     @ServerStarting
     public void serverStarting(FMLServerStartingEvent event) {
-        if (Config.auto_portforwarding_enabled)
+        if (Config.autoPortforwardingEnabled)
             proxy.registerServerPort();
     }
 

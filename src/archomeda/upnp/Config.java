@@ -18,11 +18,11 @@ import net.minecraftforge.common.Configuration;
  * @author Archomeda
  */
 public class Config {
-    private final static String comment_external_ip = "Used for setting the external IP address of the server manually. If empty, it will be automatically detected from an UPnP enabled router.";
-    private final static String comment_auto_portforwarding_enabled = "Enable auto UPnP port forwarding of the server port";
+    private final static String comment_externalIp = "Used for setting the external IP address of the server manually. If empty, it will be automatically detected from an UPnP enabled router.";
+    private final static String comment_autoPortforwardingEnabled = "Enable auto UPnP port forwarding of the server port";
 
-    public static String external_ip;
-    public static boolean auto_portforwarding_enabled;
+    public static String externalIp;
+    public static boolean autoPortforwardingEnabled;
 
     /**
      * Loads the configuration of the mod.
@@ -34,9 +34,9 @@ public class Config {
         try {
             config.load();
 
-            external_ip = config.get(Configuration.CATEGORY_GENERAL, "external_ip", "", comment_external_ip).value;
-            auto_portforwarding_enabled = config.get(Configuration.CATEGORY_GENERAL, "auto_portforwarding_enabled",
-                    true, comment_auto_portforwarding_enabled).getBoolean(true);
+            externalIp = config.get(Configuration.CATEGORY_GENERAL, "external_ip", "", comment_externalIp).value;
+            autoPortforwardingEnabled = config.get(Configuration.CATEGORY_GENERAL, "auto_portforwarding_enabled", true,
+                    comment_autoPortforwardingEnabled).getBoolean(true);
         } catch (Exception e) {
             MinecraftUpnp.log.severe("MinecraftUPnP has encountered a problem while loading its configuration");
         } finally {
