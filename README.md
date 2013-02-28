@@ -11,7 +11,7 @@ Please note that this readme is provided "as is" and may contain incorrect and/o
 
 
 ## Features ##
-In this section are all features listed that are currently available in MinecraftUPnP. If you want a feature to be added, please submit an issue or fork this repo and do a pull request.
+All features currently available in MinecraftUPnP are listed below. If you want a feature to be added, please submit an issue or fork this repo and do a pull request.
 
 ### For users ###
 Currently, the feature list for users is a bit limited.
