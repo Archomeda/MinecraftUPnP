@@ -24,6 +24,12 @@ public class Config {
     public static String external_ip;
     public static boolean auto_portforwarding_enabled;
 
+    /**
+     * Loads the configuration of the mod.
+     * 
+     * @param config
+     *            The configuration to load.
+     */
     public static void load(Configuration config) {
         try {
             config.load();
