@@ -50,7 +50,7 @@ Only the main features are listed here. For other (more hidden) features, please
 3. Inside the `MinecraftUPnP` directory, create a file named `build.properties` with the following properties:
   - `mcp.home=<relative_path_to_mcp_dir>` (most common: `forge/mcp` or `../forge/mcp`)
   - `version.minecraft=<version>` (Minecraft version, current: 1.4.7)
-  - `version=<version>` (MinecraftUPnP version, last: 1.0)
+  - `version=<version>` (MinecraftUPnP version, latest: 1.0)
 4. Run `ant build` and let it run for a while. Please note that an active internet connection is required when running this for the first time as it will download Maven first in order to resolve and download the dependencies. After that, it will automatically compile and obfuscate the code.
 5. If successful, inside the `build` directory, you should see a new .zip file with your version numbers in its name.
 
